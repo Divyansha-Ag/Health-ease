@@ -961,3 +961,151 @@ button { cursor: pointer; font-family: inherit; }
   .doctors-grid { grid-template-columns: 1fr; }
   .search-filter-section { flex-direction: column; }
 }
+
+/* =============================================
+   DOCTOR DASHBOARD
+   ============================================= */
+.doctor-dashboard-page {
+  min-height: 100vh;
+  background: var(--bg-light);
+  padding-bottom: 48px;
+}
+
+.doctor-dashboard-header {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.doctor-dashboard-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 28px 24px;
+}
+
+.doctor-dashboard-title {
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.doctor-dashboard-subtitle {
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+.doctor-dashboard-body {
+  padding-top: 32px;
+}
+
+.doctor-dashboard-section {
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 28px 24px;
+  margin-bottom: 24px;
+}
+
+.doctor-section-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.doctor-appointments-count {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.doctor-availability-hint {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.availability-date-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 18px 16px;
+  margin-bottom: 16px;
+  background: var(--bg-light);
+}
+
+.availability-date-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+
+.availability-slot-toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.availability-toggle {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: white;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all var(--transition);
+  min-width: 120px;
+  text-align: left;
+}
+
+.availability-toggle.is-on {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+.availability-toggle.is-off {
+  opacity: 0.85;
+  background: #f3f4f6;
+}
+
+.availability-toggle-slot {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.availability-toggle-state {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-secondary);
+}
+
+.availability-toggle.is-on .availability-toggle-state {
+  color: var(--primary);
+}
+
+@media (max-width: 768px) {
+  .doctor-dashboard-header-inner {
+    padding: 20px 16px;
+  }
+
+  .doctor-dashboard-section {
+    padding: 20px 16px;
+  }
+
+  .availability-toggle {
+    min-width: calc(50% - 8px);
+    flex: 1 1 calc(50% - 8px);
+  }
+}

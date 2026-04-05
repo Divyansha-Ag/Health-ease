@@ -5,6 +5,7 @@ export const doctorsData = [
     specialty: "Cardiologist",
     department: "cardiology",
     experience: "8+ years experience",
+    credentials: { email: "dr.ananya@healthease.com", password: "doctor123" },
     image: "https://imgs.search.brave.com/9MLSabd3UTlHNVaoM8wlidBhAXF1kexo-NwcNCUWJR4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuc3F1YXJlc3Bh/Y2UtY2RuLmNvbS9j/b250ZW50L3YxLzYx/YjhlNmZhMTY3NGU5/MGI2ZWJiNGEzYi81/N2Y2ODMxMC0wYjM1/LTQ5MWItOTVlZS00/NWEwMGUwM2NlOWMv/U3R1ZGlvK0IrSGVh/ZHNob3RzK2ZvcitE/b2N0b3JzX0NoZW4t/MjczOGIuanBn",
     bio: "Specialist in diagnosing and treating heart conditions with a patient-first approach.",
     availability: {
@@ -21,6 +22,7 @@ export const doctorsData = [
     specialty: "Pediatrician",
     department: "pediatrics",
     experience: "8+ years experience",
+    credentials: { email: "dr.rohan@healthease.com", password: "doctor123" },
     image: "https://imgs.search.brave.com/h9KdT44Q_LxfAwthY8UmbyV3HcxxguguDdwTc1ue4jA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvODk2/ODk3MTA2L3Bob3Rv/L2phcGFuZXNlLW1l/ZGljYWwtc3lzdGVt/LXRydXN0ZWQtZG9j/dG9ycy1wb3J0cmFp/dC5qcGc_cz02MTJ4/NjEyJnc9MCZrPTIw/JmM9dFJ5cG94TkZv/TjYxOGtzVVdzcjJQ/dWxQaXN0QVRrcExq/dVdMUGZ6V0NsOD0",
     bio: "Dedicated to providing compassionate care for infants, children, and adolescents.",
     availability: {
@@ -37,6 +39,7 @@ export const doctorsData = [
     specialty: "Dermatologist",
     department: "dermatology",
     experience: "8+ years experience",
+    credentials: { email: "dr.priya@healthease.com", password: "doctor123" },
     image: "https://imgs.search.brave.com/8KSzK3GC-yNdIQW7Hqoqkr3ckUzSLtJbNpV5OpmIl1A/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9icmlh/bnNodW13YXkuY29t/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDIy/LzA5L01vZGVybi1E/b2N0b3JzLUhlYWRz/aG90cy1IZWFsdGhj/YXJlLUhlYWRzaG90/LVBob3RvZ3JhcGhl/ci1EYWxsYXMuanBn",
     bio: "Expert in skin conditions, cosmetic dermatology, and advanced skin care treatments.",
     availability: {
@@ -53,6 +56,7 @@ export const doctorsData = [
     specialty: "Orthopedic Surgeon",
     department: "orthopedics",
     experience: "8+ years experience",
+    credentials: { email: "dr.arjun@healthease.com", password: "doctor123" },
     image: "https://imgs.search.brave.com/-_syLFrrWCIlZH0JVYdCHgZFI9u2uxU1Qc9ZDccRmr8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9icmlh/bnNodW13YXkuY29t/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDIy/LzA5L1Byb29mZXNz/aW9uYWwtUGh5c2lj/aWFuLUhlYWRzaG90/cy1mb3ItRGFsbGFz/LURvY3RvcnMtSGVh/bHRoY2FyZS1IZWFk/c2hvdC1QaG90b2dy/YXBoZXIuanBn",
     bio: "Skilled in joint replacement, sports injuries, and musculoskeletal disorders.",
     availability: {
@@ -69,6 +73,7 @@ export const doctorsData = [
     specialty: "Neurologist",
     department: "neurology",
     experience: "8+ years experience",
+    credentials: { email: "dr.neha@healthease.com", password: "doctor123" },
     image: "https://imgs.search.brave.com/4fKBwHtdzBvFq9lrz3EOSZN37Q9gSfG1aatkflO7cLY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9icmlh/bnNodW13YXkuY29t/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDIy/LzA5L1Byb2Zlc3Np/b25hbC1Eb2N0b3Jz/LUhlYWRzaG90cy1E/YWxsYXMtSGVhbHRo/Y2FyZS1NZWRpY2Fs/LVJlc2lkZW5jeS1I/ZWFkc2hvdHMuanBn",
     bio: "Specializes in neurological disorders including migraines, epilepsy, and stroke care.",
     availability: {
@@ -85,6 +90,7 @@ export const doctorsData = [
     specialty: "Ophthalmologist",
     department: "ophthalmology",
     experience: "8+ years experience",
+    credentials: { email: "dr.vikram@healthease.com", password: "doctor123" },
     image: "https://imgs.search.brave.com/DOPFP_TxTFlzg3uYv1iTIwAyK4wbB-J6DFejV-k5SM0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/cHJvZC53ZWJzaXRl/LWZpbGVzLmNvbS82/MjlkNGEwNzgxOTJk/YWJiNjY4MmFlYzYv/NjNlMTExMjM5ZWE5/MDcwYzAzNzA2ZDMy/X0F0bGFudGEtSGVh/ZHNob3RzLWZvci1E/b2N0b3JzLmpwZw",
     bio: "Expert in eye care, vision correction surgery, and treatment of ocular diseases.",
     availability: {

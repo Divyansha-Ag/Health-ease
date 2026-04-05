@@ -1,24 +1,32 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { doctorsData } from "../data/mockData";
 
-export default function LoginPage({ onLogin }) {
+export default function DoctorLoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setError("");
 
-    const lowerEmail = email.toLowerCase();
+    const normalizedEmail = email.trim().toLowerCase();
+    const match = doctorsData.find(
+      (d) =>
+        d.credentials?.email?.toLowerCase() === normalizedEmail &&
+        d.credentials?.password === password
+    );
 
-    if (lowerEmail.includes("patient") || lowerEmail.includes("@")) {
-      // Extract a friendly name from email
-      const namePart = email.split("@")[0];
-      const name = namePart.charAt(0).toUpperCase() + namePart.slice(1);
-      onLogin({ email, name });
+    if (match) {
+      localStorage.setItem(
+        "doctorSession",
+        JSON.stringify({ doctorId: match.id, doctorName: match.name.replace(/^Dr\.\s*/i, "") })
+      );
+      navigate("/doctor/dashboard", { replace: true });
     } else {
-      setError("Please use a valid patient email to log in.");
+      setError("Invalid credentials. Please try again.");
     }
   };
 
@@ -34,51 +42,50 @@ export default function LoginPage({ onLogin }) {
           HealthEase
         </div>
 
-        <h2>Welcome Back</h2>
-        <p className="login-subtitle">Login to continue</p>
+        <h2>Doctor Portal</h2>
+        <p className="login-subtitle">Login to manage your schedule</p>
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="doctor-email">Email</label>
             <input
               type="email"
-              id="email"
-              placeholder="Enter your email"
+              id="doctor-email"
+              placeholder="doctor@healthease.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              autoComplete="username"
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="doctor-password">Password</label>
             <input
               type="password"
-              id="password"
+              id="doctor-password"
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              autoComplete="current-password"
             />
           </div>
 
           {error && <p className="login-error">{error}</p>}
 
-          <button type="submit" className="login-btn">Login</button>
+          <button type="submit" className="login-btn">
+            Login as Doctor
+          </button>
         </form>
 
         <div className="login-hint">
-          <strong>Demo credentials:</strong><br />
-          Email: <code>patient@healthease.com</code><br />
-          Password: any value
+          <strong>Demo:</strong> e.g. <code>dr.ananya@healthease.com</code> /{" "}
+          <code>doctor123</code>
         </div>
 
-        <p className="signup-text">
-          Don't have an account? <a href="#">Sign up</a>
-        </p>
-
-        <p className="signup-text" style={{ marginTop: 12 }}>
-          <Link to="/doctor/login">Are you a doctor? Login here</Link>
+        <p className="signup-text" style={{ marginTop: 20 }}>
+          <Link to="/">Are you a patient? Login here</Link>
         </p>
       </div>
     </div>

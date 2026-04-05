@@ -1,48 +1,78 @@
 import { useState } from "react";
 import { doctorsData } from "../data/mockData";
 
-export default function DoctorProfile({ doctorId, onBook, navigateTo, existingAppointments }) {
+const AVAILABILITY_KEY = "doctorAvailability";
+
+function readAvailabilityOverrides() {
+  try {
+    const raw = localStorage.getItem(AVAILABILITY_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
+
+function getEffectiveSlotsForDate(doctorId, date, doctor) {
+  const overrides = readAvailabilityOverrides();
+  const custom = overrides[String(doctorId)]?.[date];
+  const base = doctor.availability[date] || [];
+  return custom !== undefined ? custom : base;
+}
+
+export default function DoctorProfile({
+  doctorId,
+  onBook,
+  navigateTo,
+  existingAppointments,
+  patientName,
+}) {
   const doctor = doctorsData.find((d) => d.id === doctorId);
 
   const today = new Date().toISOString().split("T")[0];
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedSlot, setSelectedSlot] = useState("");
-  const [booked, setBooked] = useState(false);
+  const [booked, setBooked] = useState("");
 
   if (!doctor) {
     return (
       <div className="doctor-profile-page">
         <div className="container">
           <p>Doctor not found.</p>
-          <button className="back-btn" onClick={() => navigateTo("doctors")}>← Back to Doctors</button>
+          <button className="back-btn" onClick={() => navigateTo("doctors")}>
+            ← Back to Doctors
+          </button>
         </div>
       </div>
     );
   }
 
-  // Find slots already booked for this doctor + date by the patient
   const bookedSlots = existingAppointments
     .filter((a) => a.doctorId === doctor.id && a.date === selectedDate)
     .map((a) => a.slot);
 
-  const availableSlots = selectedDate ? (doctor.availability[selectedDate] || []) : [];
+  const availableSlots = selectedDate
+    ? getEffectiveSlotsForDate(doctor.id, selectedDate, doctor)
+    : [];
 
   const handleBook = () => {
     if (!selectedDate || !selectedSlot) return;
 
+    const name = (patientName && String(patientName).trim()) || "Patient";
+
     onBook({
+      patientName: name,
       doctorId: doctor.id,
       doctorName: doctor.name,
       specialty: doctor.specialty,
       date: selectedDate,
       slot: selectedSlot,
-      status: "confirmed",
+      status: "Confirmed",
     });
 
-    setBooked(true);
+    setBooked("done");
   };
 
-  if (booked) {
+  if (booked === "done") {
     return (
       <div className="doctor-profile-page">
         <div className="container" style={{ textAlign: "center", paddingTop: 60 }}>
@@ -70,18 +100,18 @@ export default function DoctorProfile({ doctorId, onBook, navigateTo, existingAp
   return (
     <section className="doctor-profile-page">
       <div className="container">
-        {/* Back Button */}
         <button className="back-btn" onClick={() => navigateTo("doctors")}>
           ← Back to Doctors
         </button>
 
-        {/* Profile Header */}
         <div className="profile-header">
           <img
             src={doctor.image}
             alt={doctor.name}
             className="profile-img"
-            onError={(e) => { e.target.src = "https://i.pravatar.cc/150?img=1"; }}
+            onError={(e) => {
+              e.target.src = "https://i.pravatar.cc/150?img=1";
+            }}
           />
           <div className="profile-info">
             <h1>{doctor.name}</h1>
@@ -91,12 +121,12 @@ export default function DoctorProfile({ doctorId, onBook, navigateTo, existingAp
           </div>
         </div>
 
-        {/* Booking Section */}
         <div className="booking-section">
           <h2>Book an Appointment</h2>
 
-          {/* Date Picker */}
-          <label className="date-picker-label" htmlFor="apptDate">Select Date</label>
+          <label className="date-picker-label" htmlFor="apptDate">
+            Select Date
+          </label>
           <input
             type="date"
             id="apptDate"
@@ -109,7 +139,6 @@ export default function DoctorProfile({ doctorId, onBook, navigateTo, existingAp
             }}
           />
 
-          {/* Time Slots */}
           {selectedDate && (
             <>
               <p className="slots-label">
@@ -126,6 +155,7 @@ export default function DoctorProfile({ doctorId, onBook, navigateTo, existingAp
                     return (
                       <button
                         key={slot}
+                        type="button"
                         className={`slot-btn${isSelected ? " selected" : ""}${isBooked ? " booked" : ""}`}
                         onClick={() => !isBooked && setSelectedSlot(slot)}
                         disabled={isBooked}
@@ -147,8 +177,8 @@ export default function DoctorProfile({ doctorId, onBook, navigateTo, existingAp
             </p>
           )}
 
-          {/* Confirm Button */}
           <button
+            type="button"
             className="confirm-btn"
             onClick={handleBook}
             disabled={!selectedDate || !selectedSlot}

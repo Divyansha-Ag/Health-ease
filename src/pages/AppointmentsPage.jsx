@@ -48,8 +48,12 @@ export default function AppointmentsPage({ appointments, newlyBookedId, navigate
                       <td>{appt.date}</td>
                       <td>{appt.slot}</td>
                       <td>
-                        <span className={`status-badge status-${appt.status}`}>
-                          {appt.status.charAt(0).toUpperCase() + appt.status.slice(1)}
+                        <span
+                          className={`status-badge status-${String(
+                            appt.status || "confirmed"
+                          ).toLowerCase()}`}
+                        >
+                          {String(appt.status || "Confirmed")}
                         </span>
                       </td>
                     </tr>
